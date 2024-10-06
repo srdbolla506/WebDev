@@ -5,6 +5,8 @@
 // without using setInterval method. 
 // This code works in an asynchromous way.
 
+
+
 var counter = 0;
 
 const updateCounter = () => {
@@ -13,10 +15,6 @@ const updateCounter = () => {
     
     let p = createUpdateCounterPromise()
     p.then(updateCounter)
-}
-
-function setCustomInterval(resolve) {
-    resolve();
 }
 
 function createUpdateCounterPromise() {
