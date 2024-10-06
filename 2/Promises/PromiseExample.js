@@ -2,6 +2,8 @@
 // Seeing how Javascript Promise class works
 
 
+/* -------------------- First part -- Understanding --------------------*/
+
 // This Promise paramter function takes another function called resolve() as parameter and it needs to be called to complete the Promise call which inturn calls the then part of callback
 // promiseParamterFunction can have any number of parameters but the first parameter is always considered first parameter in then and rest all parameters will execute second parameter in then.
 function promiseParamterFunction(someFunction, someFunction2, someFunction3) {
@@ -51,3 +53,42 @@ function someFunctionCallback() {
     console.log("Some Function callback");
 }
 
+//-------------------------------------------------
+
+
+
+/* --------------------- Second Part - Timeout example ------------------------ */
+
+function setTimeoutAsyncPromise(millisec) {
+    return new Promise(resolve => setTimeout(resolve, millisec));
+}
+
+function callback1() {
+    console.log("Promise resolved after given number of millisec");
+}
+
+setTimeoutAsyncPromise(6000).then(callback1);
+
+
+//Trying out with reject
+function setTimeoutAsyncPromise1(millisec) {
+    return new Promise((resolve, reject) => callSetTimeoutBasedOnCondition(resolve, reject, millisec));
+}
+
+function callSetTimeoutBasedOnCondition(resolve, reject, millisec) {
+    if (millisec < 10) {
+        setTimeout(resolve, millisec);
+    } else {
+        setTimeout(reject, 2000);
+    }    
+}
+
+function callback2Rejected() {
+    console.log("Promise rejected after 2 sec");
+}
+
+function callback2() {
+    console.log("Promise resolved after given number of millisec");
+}
+
+setTimeoutAsyncPromise1(10000).then(callback2, callback2Rejected);
