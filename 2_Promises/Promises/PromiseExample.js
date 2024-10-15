@@ -1,4 +1,7 @@
 
+//PromiseExample.js
+
+
 // Seeing how Javascript Promise class works
 
 
@@ -64,7 +67,7 @@ function setTimeoutAsyncPromise(millisec) {
 }
 
 function callback1() {
-    console.log("Promise resolved after given number of millisec");
+    console.log("Promise resolved after given number of millisec - 6");
 }
 
 setTimeoutAsyncPromise(6000).then(callback1);
