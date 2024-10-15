@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <style>
+      body {
+        background-color: black;
+      }
+
+      .todoDiv {
+        width: 40%;
+        margin: 10% 0 25% 30%;
+        background-color: cadetblue;
+        border-radius: 10px;
+        vertical-align: middle;
+        align-content: center;
+      }
+
+      .todo {
+        display: grid;
+        grid-template-columns: 1fr 74fr 4fr;
+        column-gap: 20px;
+        margin: 20px;
+        margin-right: 15%;
+        align-content: center;
+        border-bottom: 1px;
+        border-color: black;
+      }
+
+      .addButton {
+        background-image: url("./plus_icon.png");
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        background-color: transparent;
+      }
+
+      .checkbox,
+      .deleteButton {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+      }
+
+      .checkbox {
+        background-image: url("./uncheck_icon.png");
+        background-repeat: no-repeat;
+      }
+
+      .deleteButton,
+      .addButton,
+      .checkbox {
+        background-repeat: no-repeat;
+        background-color: transparent;
+        border: none;
+        background-size: cover;
+      }
+
+      .deleteButton {
+        background-image: url("./delete_icon.png");
+      }
+
+      h1 {
+        margin-left: 40%;
+        color: white;
+      }
+
+      .addtodo {
+        width: 90%;
+        height: 40px;
+        display: grid;
+        grid-template-columns: 20fr 1fr;
+        column-gap: 20px;
+        margin-left: 4%;
+        align-content: center;
+        vertical-align: middle;
+        margin-bottom: 4%;
+      }
+
+      .enterTodoInput {
+        height: 25px;
+        border-radius: 10px;
+        border-width: 0.5px;
+        margin-top: 0.75%;
+      }
+
+      .checkboxComplete {
+        border: none;
+        background-image: url("./checked_icon.png");
+        background-repeat: no-repeat;
+        width: 20px;
+        height: 20px;
+        cursor: none;
+        background-size: cover;
+        background-color: transparent;
+      }
+
+      .todoText {
+        text-decoration: none;
+        color: white;
+        margin: 2px;
+        user-select: none;
+        background-color: transparent;
+        border: none;
+      }
+
+      .todoTextEdit {
+        user-select: all;
+        color: white;
+        border: black;
+        background-color: transparent;
+      }
+
+      .textStrikeThrough {
+        text-decoration: line-through;
+        color: white;
+        margin: 2px;
+        user-select: none;
+        background-color: transparent;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="todoDiv">
+      <h1>To Do List</h1>
+      <div class="addtodo">
+        <input
+          class="enterTodoInput"
+          type="text"
+          placeholder="Please enter your todo"
+          onkeypress="onKeyPress()"
+        />
+        <input class="addButton" type="button" onclick="addtodo()" />
+      </div>
+      <div class="todoslist"></div>
+    </div>
+
+    <script>
+      var todosList = [];
+      var editingIndex = -1;
+
+      window.addEventListener("mouseup", (event) => {
+        clearTodoInput();
+      });
+
+      function addtodo() {
+        let inputValue = document.querySelector(".enterTodoInput").value;
+        if (inputValue.trim() == "") {
+          clearTodoInput();
+          alert("Please enter a todo");
+          return;
+        }
+        todosList.push({ text: inputValue, isComplete: false });
+        render();
+        document.querySelector(".enterTodoInput").value = "";
+      }
+
+      function render() {
+        document.querySelector(".todoslist").innerHTML = "";
+
+        for (index = 0; index < todosList.length; index++) {
+          let divElem = addToDoComponent(
+            todosList[index].text,
+            index,
+            todosList[index].isComplete
+          );
+          document.querySelector(".todoslist").appendChild(divElem);
+        }
+      }
+
+      function addToDoComponent(todoText, index, isComplete) {
+        let divElem = document.createElement("div");
+        divElem.setAttribute("id", "todo-" + index);
+        divElem.setAttribute("class", "todo");
+
+        let checkElem = document.createElement("input");
+        checkElem.setAttribute("id", "checkbox-" + index);
+        checkElem.setAttribute("type", "button");
+        checkElem.setAttribute("onclick", "markComplete(" + index + ")");
+        checkElem.setAttribute("class", "checkbox");
+
+        let textElem = document.createElement("input");
+        textElem.setAttribute("id", "h4-" + index);
+        textElem.setAttribute("type", "text");
+        textElem.setAttribute("class", "todoText");
+        textElem.setAttribute("onkeypress", "onTodoKeyPress(" + index + ")");
+        textElem.value = todoText;
+
+        let deleteElem = document.createElement("input");
+        deleteElem.setAttribute("class", "deleteButton");
+        deleteElem.setAttribute("type", "button");
+        deleteElem.setAttribute("onclick", "deleteButtonClick(" + index + ")");
+
+        divElem.appendChild(checkElem);
+        divElem.appendChild(textElem);
+        divElem.appendChild(deleteElem);
+
+        if (isComplete == true) {
+          checkElem.setAttribute("class", "checkboxComplete");
+          textElem.setAttribute("class", "textStrikeThrough");
+        }
+
+        return divElem;
+      }
+
+      function markComplete(index) {
+        todosList[index].isComplete = true;
+        markCompleteUI(index);
+      }
+
+      function markCompleteUI(index) {
+        let checkElem = document.getElementById("checkbox-" + index);
+        checkElem.setAttribute("class", "checkboxComplete");
+
+        let h4textElem = document.getElementById("h4-" + index);
+        h4textElem.setAttribute("class", "textStrikeThrough");
+      }
+
+      function deleteButtonClick(index) {
+        todosList.splice(index, 1);
+        render();
+      }
+
+      function onTodoKeyPress(index) {
+        editingIndex = index;
+        let textElem = document.getElementById("h4-" + index);
+        todosList[index].text = textElem.value;
+      }
+
+      function onKeyPress() {
+        clearTodoInput();
+      }
+
+      function clearTodoInput() {
+        let inputValue = document.querySelector(".enterTodoInput").value;
+        if (inputValue.trim() == "") {
+          document.querySelector(".enterTodoInput").value = "";
+        }
+      }
+    </script>
+  </body>
+</html>
