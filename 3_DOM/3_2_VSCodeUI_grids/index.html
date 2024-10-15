@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>Visual Studio Code - Code Editor</title>
+    <style>
+      body {
+        background-color: #0d1117;
+      }
+      .topNavBar {
+        display: grid;
+        grid-template-columns: 7fr 18fr 1fr 6fr;
+        /* padding-inline: 2.5rem; */
+        /* column-gap: 2rem; */
+        width: 80%;
+        margin-left: 9%;
+        margin-top: 18px;
+      }
+      .visualStudio {
+        background-size: 24px 24px;
+        background-repeat: no-repeat;
+        padding-left: 36px;
+        color: white;
+        font-size: 16pt;
+      }
+      .grayLinks {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 0.7fr 2fr 1fr 4fr;
+        padding-inline: 2rem;
+        column-gap: 1.5rem;
+      }
+      .grayLinks div {
+        color: gray;
+        cursor: pointer;
+        font-size: 14pt;
+        margin-top: 1px;
+      }
+      .grayLinks div :hover {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topNavBar">
+      <a class="visualStudio">
+        <span>Visual Studio Code</span>
+      </a>
+      <!-- <div class="visualStudio">
+        <img
+          class="visualStudioImg"
+          src="https://timingapp.com/cdn-cgi/image/format=auto,width=256/img/app-icons/com.microsoft.VSCode/icon_128x128_2x.png"
+        />
+        Visual Studio Code
+      </div> -->
+      <div class="grayLinks">
+        <div>Docs</div>
+        <div>Updates</div>
+        <div>Blog</div>
+        <div>API</div>
+        <div>Extensions</div>
+        <div>FAQ</div>
+        <div>GitHub Copilot</div>
+      </div>
+      <div class="displayTheme">
+        <img src="https://code.visualstudio.com/assets/icons/theme-light.svg" />
+      </div>
+      <div>
+        <button class="searchDocs">Search Docs</button>
+        <button class="download">Download</button>
+      </div>
+    </div>
+    <div class="versionBar"></div>
+    <div class="codefasterBlock"></div>
+    <div class="copilotBlock"></div>
+    <div class="codeInAnyLanBlock"></div>
+    <div class="fullyCustomizableBlock"></div>
+    <div class="codeAnywhereBlock"></div>
+    <div class="codeWithRichFeaturesBlock"></div>
+    <div class="bottomBar"></div>
+  </body>
+</html>
