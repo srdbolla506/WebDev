@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Practice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <h1>ToDo List</h1>
+    <h4>1) Wake up</h4>
+    <h4>2) Freshen up</h4>
+    <h4>3) Exercise</h4>
+    <h4>4) Get to work</h4>
+
+    <input id="inputToDo" placeholder="Add to ToDo list" />
+    <button onclick="submitClicked()">Add</button>
+
+    <h4 id="timer">1</h4>
+
+    <script>
+      var counter = 0;
+      function submitClicked() {
+        const todo = document.querySelector("#inputToDo").value;
+        document.querySelectorAll(
+          "h4"
+        )[3].innerHTML += `<h4 id='todo${document.querySelector("#timer")}'> ${
+          document.querySelectorAll("h4").length
+        } ${todo} </h4>`;
+      }
+      setInterval(incrementTimer, 1000);
+
+      function incrementTimer() {
+        counter += 1;
+        document.querySelector("#timer").innerHTML = counter;
+      }
+    </script>
+  </body>
+</html>

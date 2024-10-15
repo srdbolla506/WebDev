@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ToDo Application</title>
+  </head>
+  <body>
+    <h1>To Do List</h1>
+    <div>
+      <input id="inputText" type="text" placeholder="Enter ToDo text" />
+      <button onclick="addToDo()">Add ToDo</button>
+    </div>
+    <div id="todosList">
+      <!-- <div id="todo-1">
+        <h4>1. Wake up</h4>
+        <button onclick="deleteToDo(1)">Delete</button>
+      </div> -->
+    </div>
+
+    <script>
+      var index = 1;
+      function addToDo() {
+        const inputTextValue = document.querySelector("#inputText").value;
+
+        if (inputTextValue == "") {
+          alert("Please enter todo value");
+          return;
+        }
+        let divElem = document.createElement("div");
+        divElem.setAttribute("id", `todo-${index}`);
+        divElem.setAttribute("style", "display:flex;");
+
+        let h4Elem = document.createElement("h4");
+        h4Elem.textContent = index + ". " + inputTextValue;
+
+        let buttonElem = document.createElement("button");
+        buttonElem.setAttribute("onclick", "deleteToDo(" + index + ")");
+        buttonElem.setAttribute(
+          "style",
+          " margin-left: 20px; height: 30px; vertical-align: middle; margin-top: 15px;"
+        );
+        buttonElem.textContent = "Delete";
+
+        divElem.appendChild(h4Elem);
+        divElem.appendChild(buttonElem);
+
+        let parentElem = document.getElementById("todosList");
+        parentElem.appendChild(divElem);
+
+        index += 1;
+
+        document.querySelector("#inputText").value = "";
+      }
+
+      function deleteToDo(indexValue) {
+        let elem = document.querySelector(`#todo-${indexValue}`);
+        if (elem) {
+          elem.parentNode.removeChild(elem);
+        }
+      }
+    </script>
+  </body>
+</html>
