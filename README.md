@@ -23,3 +23,19 @@ Contains the sample code written for understanding Promise class in Javascript a
 Contains the implementation of ToDo list implemented using DOM which has add, edit, delete and mark todo as complete operations.
 
 -----------------------------------------
+
+**4/Node_js** --> Node.js basics, usage and practice
+
+Node.js assignments to create cli for counter and todolist using 'commander' package
+
+-----------------------------------------
+
+**5/Authentication** --> Authentication, middleware and full stack ToDo application
+
+Contains Authentication done using token, jwt (jsonwebtoken), using auth as middleware to verify the signed in users and connecting frontend to backend practice.
+
+Contains a basic ToDo application built using Frontend (HTML, CSS, Javascript) and Backend (Node.js with express.js).
+
+-----------------------------------------
+
+
