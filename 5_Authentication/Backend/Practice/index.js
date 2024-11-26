@@ -8,7 +8,7 @@ app.use(express.json());
 const users = [];
 const JWT_SECRET = "randomDivyaJWTSECRET";
 
-// Token based authentication
+// Token based authentication - Custom function for generating a random token
 // function generateToken() {
 //     const options = ["a", "b", "c", "d", "e", "0", "1", "2", "3", "4", "5"];
 //     var token = "";
