@@ -32,7 +32,7 @@ Node.js assignments to create cli for counter and todolist using 'commander' pac
 
 **5/Authentication** --> Authentication, middleware and full stack ToDo application
 
-Contains Authentication done using token, jwt (jsonwebtoken), using auth as middleware to verify the signed in users and connecting frontend to backend practice.
+Contains basic Authentication done using token, jwt (jsonwebtoken), using auth as middleware to verify the signed in users and connecting frontend to backend practice.
 
 Contains a basic ToDo application built using Frontend (HTML, CSS, Javascript) and Backend (Node.js with express.js). ---------> In Progress
 
