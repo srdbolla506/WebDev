@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <title> </title>
+    <style>
+      body {
+        background-color: black;
+      }
+      .centerFrame {
+        width: auto;
+        height: auto;
+        align-content: center;
+        vertical-align: center;
+        color: white
+      }
+    </style>
+  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+  <script> 
+      async function signup() {
+          const username = document.getElementById("signup-username").value;
+          const password = document.getElementById("signup-password").value;
+
+          const response = await axios.post("http://localhost:3000/signup", {
+            username: username,
+            password: password
+          });
+
+          alert("You are signed up");
+      }
+  
+      async function signin() {
+
+        const username = document.getElementById("signin-username").value;
+        const password = document.getElementById("signin-password").value;
+
+        const response = await axios.post("http://localhost:3000/signin", {
+          username: username,
+          password : password
+        });
+
+        localStorage.setItem("token", response.data.token);
+
+        getUserInformation();
+
+        // document.getElementById("userInformation").innerHTML = "Username: " + response.data.message + " Token: " + response.data.token;
+
+        // const userInfoDiv = document.getElementById("userInformation");
+        // const infoDiv = document.createAttribute("div");
+        // infoDiv.textContent = "Message: " + response.data.message;
+        // userInfoDiv.appendChild(infoDiv);
+
+        // const tokenDiv = document.createAttribute("div");
+        // tokenDiv.textContent = "Token: " + response.data.token;
+        // userInfoDiv.appendChild(tokenDiv);
+
+      }
+
+      async function getUserInformation() {
+          const response = await axios.get("http://localhost:3000/me", {
+              headers: {
+                 token: localStorage.getItem("token")
+              }
+          });
+          document.getElementById("userInformation").innerHTML  = "Username: " + response.data.username + "\n Password: " + response.data.password;
+      }
+
+      // getUserInformation();
+  </script>
+  <body>
+    <div class="centerFrame">
+      <div class="signup">
+        <div>Sign up</div>
+        <div><input id="signup-username" type="text" placeholder="Username" /></div>
+        <div><input id="signup-password" type="password" placeholder="Password" /></div>
+        <div><button onclick="signup()">Submit</button></div>
+      </div>
+      </br>
+      <div class="signin">
+        <div>Sign In</div>
+        <div><input id="signin-username" type="text" placeholder="Username" /></div>
+        <div><input id="signin-password" type="password" placeholder="Password" /></div>
+        <div><button onclick="signin()">Submit</button></div>
+      </div>
+      </br>
+      <div> 
+        <div>User Information: </div> 
+        <div id="userInformation"> </div>
+      </div>
+      <div> 
+        <div><button onclick="logout()">Logout</button></div> 
+      </div>
+
+    </div>
+
+
+    
+  </body>
+</html>
